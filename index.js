@@ -30,11 +30,13 @@ io.on('connection', function(socket) {
       app.set('watchingFile', false);
       if (proc) proc.kill();
       fs.unwatchFile('./stream/image_stream.jpg');
+	console.log("kill");
     }
   });
 
   socket.on('start-stream', function() {
     startStreaming(io);
+	console.log("start");
   });
 
 });
@@ -58,7 +60,7 @@ function startStreaming(io) {
     return;
   }
 
-  var args = ["-w", "640", "-h", "480", "-o", "'./stream/image_stream.jpg'", "-t", "999999999", "-tl", "100"];
+  var args = ["-w", "640", "-h", "480", "-o", "./stream/image_stream.jpg", "-t", "999999999", "-tl", "50"];
   proc = spawn('raspistill', args);
 
   console.log('Watching for changes...');
